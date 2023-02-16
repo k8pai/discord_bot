@@ -17,3 +17,4 @@ _book
 
 # config file containing token
 config.json
+.env

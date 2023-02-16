@@ -3,7 +3,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Events, GatewayIntentBits, Collection } = require('discord.js');
-const { token } = require('./config.json');
+// const { token } = require('./config.json');
 
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -34,6 +34,21 @@ client.once(Events.ClientReady, (c) => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
+// client.on(Events.WebhooksUpdate, async (channel) => {
+// 	// Check if the webhook belongs to the bot
+// 	if (!channel?.guild?.me?.user?.bot) return;
+
+// 	// Get the last message sent by the webhook
+// 	const messages = await channel.messages.fetch({ limit: 1 });
+// 	const lastMessage = messages.first();
+
+// 	// If the last message was sent by the bot, ignore it
+// 	if (lastMessage?.author?.id === client.user.id) return;
+
+// 	// Send a reply to the webhook message
+// 	await channel.send('Hello from the bot!');
+// });
+
 client.on(Events.InteractionCreate, async (interaction) => {
 	if (!interaction.isChatInputCommand()) return;
 	console.log(interaction);
@@ -59,4 +74,4 @@ client.on(Events.InteractionCreate, async (interaction) => {
 });
 
 // Log in to Discord with your client's token
-client.login(token);
+client.login(process.env.token);
